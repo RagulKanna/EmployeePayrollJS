@@ -7,13 +7,19 @@ let employeehours = 0;
 let employeecheck = Math.floor(Math.random() * 10) % 3;
 switch (employeecheck) {
     case IS_PART_TIME:
-        employeehours = PART_TIME_HOURS;
+        employeehours = partTimeEmployee();
         break;
     case IS_FULL_TIME:
-        employeehours = FULL_TIME_HOURS;
+        employeehours = fullTimeEmployee();
         break;
     default:
         employeehours = 0;
+}
+function partTimeEmployee() {
+    return PART_TIME_HOURS;
+}
+function fullTimeEmployee() {
+return FULL_TIME_HOURS;
 }
 let employeewage = employeehours * WAGE_PER_HOUR;
 console.log("Employee wage is " + employeewage);
