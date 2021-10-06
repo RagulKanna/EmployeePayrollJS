@@ -1,4 +1,5 @@
 const NUMBER_OF_DAYS = 20;
+const MAx_HRS_IN_MONTH = 160;
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
@@ -35,15 +36,23 @@ function fullTimeEmployee() {
 
 function employeeMonthlyWage(hours) {
     let totalhrs = 0;
-    for (let days = 0; days < NUMBER_OF_DAYS; days++) {
+    let totalworkingdays = 0;
+    while (totalhrs < MAx_HRS_IN_MONTH && totalworkingdays < NUMBER_OF_DAYS) {
         let employee_check = Math.floor(Math.random() * 10) % 2;
         if (employee_check == IS_PRESENT)
             employeeMonthlyHours = hours;
         else
-        employeeMonthlyHours = 0;
+            employeeMonthlyHours = 0;
         totalhrs += employeeMonthlyHours;
+        totalworkingdays++;
     }
-    wage = totalhrs * WAGE_PER_HOUR;
+    if (totalhrs < MAx_HRS_IN_MONTH) {
+        wage = totalhrs * WAGE_PER_HOUR;
+        console.log("Total Working days: " + totalworkingdays + " Total Working Hours: " + totalhrs);
+    }
+    else {
+        wage = MAx_HRS_IN_MONTH * WAGE_PER_HOUR;
+        console.log("Total Working days: " + totalworkingdays + " Total Working Hours: " + MAx_HRS_IN_MONTH);
+    }
     return wage;
 }
-
