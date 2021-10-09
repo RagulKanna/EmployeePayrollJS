@@ -1,7 +1,7 @@
 const NUMBER_OF_DAYS = 20;
 const MAx_HRS_IN_MONTH = 160;
-const IS_PART_TIME = 1;
-const IS_FULL_TIME = 2;
+const IS_PART_TIME = 0;
+const IS_FULL_TIME = 1;
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
@@ -51,6 +51,10 @@ function employeeMonthlyWage(hours) {
     console.log("Total Working days: " + totalworkingdays + " days\nTotal Working Hours: " + totalhrs + " hrs");
     console.log("The Daily Wage is " + DailyWageandTotalWageArray);
     console.log("The total wage is " + DailyWageandTotalWageArray.reduce((a, b) => a + b));
+    DailyWageandTotalWageArray.forEach((values, number) => {
+        number++;
+        console.log(" The day " + number + " : wage is " + values);
+    });
     return wage;
 }
 
