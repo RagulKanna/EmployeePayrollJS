@@ -10,22 +10,18 @@ let employeehours = 0;
 let employeeMonthlyHours = 0
 let monthlywage = 0;
 let wage = 0;
-let employeecheck = Math.floor(Math.random() * 10) % 3;
+let employeecheck = Math.floor(Math.random() * 10) % 2;
 switch (employeecheck) {
     case IS_PART_TIME:
         employeehours = partTimeEmployee();
-        monthlywage = employeeMonthlyWage(PART_TIME_HOURS);
+        monthlywage = employeeMonthlyWage(employeehours);
         break;
     case IS_FULL_TIME:
         employeehours = fullTimeEmployee();
-        monthlywage = employeeMonthlyWage(FULL_TIME_HOURS);
+        monthlywage = employeeMonthlyWage(employeehours);
         break;
-    default:
-        employeehours = 0;
 }
 
-let employeewage = employeehours * WAGE_PER_HOUR;
-console.log("Employee daily wage is " + employeewage + " and monthly wage is " + monthlywage);
 
 function partTimeEmployee() {
     return PART_TIME_HOURS;
@@ -35,6 +31,8 @@ function fullTimeEmployee() {
 }
 
 function employeeMonthlyWage(hours) {
+    let DailyWageandTotalWageArray = new Array();
+    let total_Wage = 0;
     let totalhrs = 0;
     let totalworkingdays = 0;
     while (totalhrs < MAx_HRS_IN_MONTH && totalworkingdays < NUMBER_OF_DAYS) {
@@ -43,16 +41,22 @@ function employeeMonthlyWage(hours) {
             employeeMonthlyHours = hours;
         else
             employeeMonthlyHours = 0;
+        DailyWageandTotalWageArray.push(calculatewage(employeeMonthlyHours));
         totalhrs += employeeMonthlyHours;
         totalworkingdays++;
     }
-    if (totalhrs < MAx_HRS_IN_MONTH) {
-        wage = totalhrs * WAGE_PER_HOUR;
-        console.log("Total Working days: " + totalworkingdays + " Total Working Hours: " + totalhrs);
-    }
-    else {
-        wage = MAx_HRS_IN_MONTH * WAGE_PER_HOUR;
-        console.log("Total Working days: " + totalworkingdays + " Total Working Hours: " + MAx_HRS_IN_MONTH);
-    }
+    total_Wage = calculateTotalWage(totalhrs);
+    wage = totalhrs * WAGE_PER_HOUR;
+    console.log("Total Working days: " + totalworkingdays + " days\nTotal Working Hours: " + totalhrs +" hrs");
+    console.log("The Daily Wage is " + DailyWageandTotalWageArray + " and The total wage is " + total_Wage);
     return wage;
 }
+
+function calculateTotalWage(emp_Total_Hours) {
+    return emp_Total_Hours * WAGE_PER_HOUR;
+}
+
+function calculatewage(emp_Hours) {
+    return emp_Hours * WAGE_PER_HOUR;
+}
+
