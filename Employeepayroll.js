@@ -14,7 +14,8 @@ let DailyWageArr = new Array();
 let mapDailyWageandTotalWageArr = new Array();
 let total_Wage_from_Array;
 let day = 0;
-let dailywageArr = new Array();
+let days = 0;
+let mapdaywithdailyWage = new Map();
 
 
 let employeecheck = Math.floor(Math.random() * 10) % 2;
@@ -60,14 +61,16 @@ function employeeMonthlyWage(hours) {
             employeeMonthlyHours = hours;
         else
             employeeMonthlyHours = 0;
+            totalworkingdays++;
         DailyWageArr.push(calculatewage(employeeMonthlyHours));
+        mapdaywithdailyWage.set(totalworkingdays, calculateTotalWage(employeeMonthlyHours));
         totalhrs += employeeMonthlyHours;
-        totalworkingdays++;
     }
     wage = totalhrs * WAGE_PER_HOUR;
     console.log("Total Working Hours: " + totalhrs + " hrs");
     console.log("The total wage is " + DailyWageArr.reduce((a, b) => a + b));
     console.log("Number of working days:" + DailyWageArr.reduce(totalNoofDays, 0));
+    console.log(mapdaywithdailyWage);
     return wage;
 }
 
